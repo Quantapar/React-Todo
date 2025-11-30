@@ -5,7 +5,7 @@ const CreateTodoSchema = z.object({
   completed: z.boolean(),
 });
 const UpdateTodoSchema = z.object({
-  id: z.string,
+  id: z.string(),
 });
 
 module.exports = {
