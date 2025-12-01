@@ -1,0 +1,124 @@
+.todos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.todo-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.todo-item:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.todo-item.completed {
+  opacity: 0.7;
+  border-color: rgba(100, 108, 255, 0.3);
+}
+
+.todo-item.completed .todo-title {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.todo-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.87);
+  text-align: left;
+}
+
+.todo-description {
+  font-size: 0.95rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.65);
+  text-align: left;
+  line-height: 1.5;
+}
+
+.todo-item.completed .todo-description {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.todo-button {
+  align-self: flex-start;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-top: 0.5rem;
+}
+
+.todo-button:hover {
+  background-color: #535bf2;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.3);
+}
+
+.todo-button:active {
+  transform: translateY(0);
+}
+
+.todo-button.completed-button {
+  background-color: rgba(100, 108, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: default;
+}
+
+.todo-button.completed-button:hover {
+  background-color: rgba(100, 108, 255, 0.3);
+  transform: none;
+  box-shadow: none;
+}
+
+@media (prefers-color-scheme: light) {
+  .todo-item {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .todo-item:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  .todo-item.completed {
+    border-color: rgba(100, 108, 255, 0.2);
+  }
+
+  .todo-item.completed .todo-title {
+    color: rgba(33, 53, 71, 0.5);
+  }
+
+  .todo-title {
+    color: #213547;
+  }
+
+  .todo-description {
+    color: rgba(33, 53, 71, 0.7);
+  }
+
+  .todo-item.completed .todo-description {
+    color: rgba(33, 53, 71, 0.4);
+  }
+}
