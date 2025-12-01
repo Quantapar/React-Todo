@@ -44,17 +44,37 @@ app.put("/complete", async (req, res) => {
   await todo.save();
   res.json({ todo: todo, msg: "todo marked as completed" });
 });
-app.put("/todo/:id", (req, res) => {
+app.put("/todo/:id", async (req, res) => {
+  const { title, description, completed } = req.body;
   const id = req.params.id;
   const idInput = UpdateTodoSchema.safeParse({ id });
   if (!idInput.success) {
     return res.status(400).json({ msg: "invalid input" });
   }
-  //edit the todo with the particular id
+  const todo = await Todo.findById(id);
+  if (!todo) {
+    return res.status(404).json({ msg: "no todo with such id exists" });
+  }
+  todo.title = title;
+  todo.description = description;
+  todo.completed = completed;
+  await todo.save();
+  res.status(200).json({ updatedTodo: todo, msg: "todo updated" });
 });
-app.delete("/todo/:id", (req, res) => {
+app.delete("/todo/:id", async (req, res) => {
   const id = req.params.id;
-  //delete the todo with particular id
+  if (!id) {
+    return res.status(400).json({ msg: "no todo with such id exists" });
+  }
+  const idInput = UpdateTodoSchema.safeParse({ id });
+  if (!idInput.success) {
+    return res.json({ msg: "invalid input" });
+  }
+  const todo = await Todo.findByIdAndDelete(id);
+  if (!todo) {
+    return res.status(404).json({ msg: "no todo with such id exists" });
+  }
+  res.status(200).json({ msg: "todo deleted" });
 });
 connect();
 app.listen(3030);
