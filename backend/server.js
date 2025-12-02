@@ -3,14 +3,13 @@ const { CreateTodoSchema, UpdateTodoSchema } = require("./types");
 const jwt = require("jsonwebtoken");
 const connect = require("./models/dbConnection");
 const Todo = require("./models/model");
+const cors = require("cors");
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/todos", async (req, res) => {
   const todos = await Todo.find();
-  if (todos.length == 0) {
-    return res.status(404).json({ msg: "no todo found" });
-  }
   res.json(todos);
 });
 app.post("/todo", async (req, res) => {
