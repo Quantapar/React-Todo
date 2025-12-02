@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div>
-      <CreateTodo />
+      <CreateTodo todos={todos} setTodos={setTodos} />
       <Todos
         todos={todos}
         onComplete={markTodoComplete}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./CreateTodo.css";
 
-export function CreateTodo() {
+export function CreateTodo({ todos, setTodos }) {
   const [title, setTitle] = useState("");
   const [description, setdescription] = useState("");
 
@@ -14,6 +14,7 @@ export function CreateTodo() {
         onChange={function (e) {
           setTitle(e.target.value);
         }}
+        value={title}
       />
       <input
         type="text"
@@ -22,10 +23,15 @@ export function CreateTodo() {
         onChange={function (e) {
           setdescription(e.target.value);
         }}
+        value={description}
       />
       <button
         className="add-todo-button"
         onClick={() => {
+          if (!title || !description) {
+            alert("pls enter the todo and des");
+            return;
+          }
           fetch("http://localhost:3030/todo", {
             method: "POST",
             headers: {
@@ -38,8 +44,16 @@ export function CreateTodo() {
             }),
           }).then(async function (res) {
             const json = await res.json();
-            // alert("Todo Added");
-            window.location.reload();
+            setTodos((prev) => [
+              {
+                title: title,
+                description: description,
+                completed: false,
+              },
+              ...todos,
+            ]);
+            setTitle("");
+            setdescription("");
           });
         }}
       >
