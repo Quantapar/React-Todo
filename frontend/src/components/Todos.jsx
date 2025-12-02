@@ -1,6 +1,6 @@
 import "./Todos.css";
 
-export function Todos({ todos }) {
+export function Todos({ todos, onComplete, onDelete }) {
   return (
     <div className="todos-container">
       {todos.map(function (todo, index) {
@@ -12,12 +12,14 @@ export function Todos({ todos }) {
             <h3 className="todo-title">{todo.title}</h3>
             <h4 className="todo-description">{todo.description}</h4>
             <button
+              onClick={() => onComplete(todo._id)}
               className={`todo-button ${
                 todo.completed ? "completed-button" : ""
               }`}
             >
               {todo.completed == true ? "Completed" : "Mark as complete"}
             </button>
+            <button onClick={() => onDelete(todo._id)}>Delete</button>
           </div>
         );
       })}
